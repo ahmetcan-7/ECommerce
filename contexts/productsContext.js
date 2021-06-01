@@ -1,5 +1,6 @@
-import { createContext } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
+import { sendProducts } from '../components/navbar/navbar'
 export const ProductsContext = createContext()
 function ProductsContextProvider(props) {
   const products = [
@@ -46,8 +47,45 @@ function ProductsContextProvider(props) {
       src: 'img6.jpg'
     }
   ]
+
+  let isItNull = []
+
+  if (sendProducts() == null) {
+    isItNull = []
+  } else {
+    isItNull = sendProducts()
+  }
+
+  const [addProduct, setAddProduct] = useState(isItNull)
+
+  const addCart = (id) => {
+    const check = addProduct.every((item) => item.id !== id)
+
+    if (check) {
+      const data = products.filter((product) => {
+        return product.id === id
+      })
+      setAddProduct([...addProduct, ...data])
+    } else {
+      alert('The product has been added to cart.')
+    }
+  }
+  console.log('1.array', addProduct)
+
+  useEffect(() => {
+    localStorage.setItem('dataCart', JSON.stringify(addProduct))
+  }, [addProduct])
+
+  useEffect(() => {
+    const dataCart = JSON.parse(localStorage.getItem('dataCart'))
+    console.log('yeni data', dataCart)
+    if (dataCart) {
+      setAddProduct(dataCart)
+    }
+  }, [])
+
   return (
-    <ProductsContext.Provider value={{ products }}>
+    <ProductsContext.Provider value={{ products, addProduct, addCart }}>
       {props.children}
     </ProductsContext.Provider>
   )
