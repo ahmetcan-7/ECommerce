@@ -1,0 +1,18 @@
+.bui-stepper-buttons {
+  display: inline-block;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.bui-stepper-button {
+  padding: 0.3rem 0.9rem;
+  border: 1px solid rgb(0, 113, 194);
+}
+.bui-stepper-button:hover {
+  background-color: rgb(231, 245, 255);
+  cursor: pointer;
+}
+
+.bui-stepper-display {
+  margin: 0 1rem;
+}
