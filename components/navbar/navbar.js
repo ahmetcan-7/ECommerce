@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import useStyles from './styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -8,6 +8,8 @@ import AppleIcon from '@material-ui/icons/Apple'
 import Badge from '@material-ui/core/Badge'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import Link from 'next/link'
+import { ProductsContext } from '../../contexts/productsContext'
+
 export function sendProducts() {
   //ı am losing variables at context when the route of "/purchase" so ı created this funciton
   if (typeof Storage !== 'undefined') {
@@ -17,7 +19,19 @@ export function sendProducts() {
     return []
   }
 }
+
 function Navbar() {
+  const { addProduct } = useContext(ProductsContext)
+  const [basketCount, setBasketCount] = useState(0)
+  useEffect(() => {
+    let total = 0
+    addProduct.map((product) => {
+      total += product.count
+    })
+
+    setBasketCount(total)
+  })
+
   const classes = useStyles()
   return (
     <div className={classes.root}>
@@ -32,7 +46,7 @@ function Navbar() {
               color="inherit"
               onClick={sendProducts}
             >
-              <Badge badgeContent={1} color="secondary">
+              <Badge badgeContent={basketCount} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
