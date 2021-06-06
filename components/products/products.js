@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import CardProduct from '../cardProduct/cardProduct'
+import CardProduct from '../cartProduct/cartProduct'
 import { ProductsContext } from '../../contexts/productsContext'
 
 function Products() {
@@ -14,6 +14,7 @@ function Products() {
           text={product.text}
           src={product.src}
           price={product.price}
+          id={product.id}
         />
       ))}
     </div>
