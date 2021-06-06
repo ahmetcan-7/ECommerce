@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import StepperButton from '../stepperbutton/stepperButton'
+import ProductsContextProvider from '../../contexts/productsContext'
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -10,10 +13,12 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import Rating from '@material-ui/lab/Rating'
 import Box from '@material-ui/core/Box'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+
 import useStyles from './styles'
-function AddProduct({ title, price, src, text, id }) {
+function AddProduct({ title, price, src, text, id, firstCount, totalPrice }) {
   const classes = useStyles()
 
+  const [count, setCount] = useState(1)
   return (
     <>
       <Card className={classes.root} style={{ margin: '0.5rem' }}>
@@ -23,7 +28,7 @@ function AddProduct({ title, price, src, text, id }) {
               className={classes.media}
               component="img"
               alt="Contemplative Reptile"
-              height="250"
+              height="220"
               image={src}
               title={title}
             />
@@ -37,7 +42,7 @@ function AddProduct({ title, price, src, text, id }) {
                 {title}
               </Typography>
               <Typography gutterBottom variant="h6" component="h2">
-                {price}₺
+                {price * count}₺
               </Typography>
             </div>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -57,6 +62,14 @@ function AddProduct({ title, price, src, text, id }) {
             <AddShoppingCartIcon />
           </Button>
         </CardActions>
+        <ProductsContextProvider>
+          <StepperButton
+            updateCount={setCount}
+            id={id}
+            totalPrice={totalPrice}
+            firstCount={firstCount}
+          />
+        </ProductsContextProvider>
       </Card>
     </>
   )
