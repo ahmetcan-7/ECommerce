@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import StepperButton from '../stepperbutton/stepperButton'
 import ProductsContextProvider from '../../contexts/productsContext'
@@ -17,6 +17,10 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import useStyles from './styles'
 function AddProduct({ title, price, src, text, id, firstCount, totalPrice }) {
   const classes = useStyles()
+
+  useEffect(() => {
+    setCount(firstCount)
+  }, [])
 
   const [count, setCount] = useState(1)
   return (
