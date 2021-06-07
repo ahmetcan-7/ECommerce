@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import StepperButton from '../stepperbutton/stepperButton'
+import StepperButton from '../stepperbutton/StepperButton'
 import ProductsContextProvider from '../../contexts/productsContext'
 
 import Card from '@material-ui/core/Card'
