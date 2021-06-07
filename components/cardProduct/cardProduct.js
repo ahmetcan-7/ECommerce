@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -11,8 +11,15 @@ import Rating from '@material-ui/lab/Rating'
 import Box from '@material-ui/core/Box'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import useStyles from './styles'
-function CardProduct({ title, price, src, text }) {
+import { ProductsContext } from '../../contexts/productsContext'
+function CardProduct({ title, price, src, text, id }) {
   const classes = useStyles()
+
+  const { addCart } = useContext(ProductsContext)
+
+  const handleClick = () => {
+    addCart(id)
+  }
 
   return (
     <div>
@@ -53,7 +60,7 @@ function CardProduct({ title, price, src, text }) {
           >
             <Rating name="read-only" value={4} readOnly />
           </Box>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={handleClick}>
             <AddShoppingCartIcon />
           </Button>
         </CardActions>
