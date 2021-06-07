@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import AddProduct from '../purchase/addProduct'
-
+import Subtotal from '../subtotal/subtotal'
 function SelectedProduct({ products }) {
   let [total, setTotal] = useState(0)
 
@@ -19,9 +19,6 @@ function SelectedProduct({ products }) {
 
   return (
     <div>
-      <Link href="/">
-        <a>BackToStore</a>
-      </Link>
       <div className="products">
         {products.map((product) => (
           <AddProduct
@@ -36,8 +33,7 @@ function SelectedProduct({ products }) {
           />
         ))}
       </div>
-
-      <h4>{total}</h4>
+      <Subtotal subtotal={total} />
     </div>
   )
 }
