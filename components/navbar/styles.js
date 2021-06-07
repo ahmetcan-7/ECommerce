@@ -11,6 +11,6 @@ export default makeStyles((theme) => ({
     flexGrow: 1
   },
   color: {
-    backgroundColor: 'rgba(0, 0, 0, 0.92)'
+    backgroundColor: '#3f51b5'
   }
 }))
